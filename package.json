@@ -14,6 +14,7 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "express-mustache": "^1.0.3",
+    "express-session": "^1.15.5",
     "mustache-express": "^1.2.5"
   }
 }

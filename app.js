@@ -3,10 +3,18 @@ const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mustache = require('mustache-express');
+const session = require('express-session');
 const port = 3000;
 
-// INITIATE APP
+// INITIATE APP:
 const app = express();
+
+// INITIATE SESSION:
+app.use(session({
+ secret: 'dog person',
+ resave: false,
+ saveUninitalized: true,
+}));
 
 // SUPPLY DATA FOR GAME:
 const dictionary = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
@@ -38,7 +46,9 @@ app.get('/', function(req, res){
 
 function randomWord() {
   let word = dictionary[Math.floor(Math.random() * dictionary.length)];
+  req.session.word = word;
   console.log(word);
+  console.log(req.session.word);
 }
 
 // randomWord();

@@ -3,29 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>Mystery Word</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
     <h1>Mystery Word</h1>
 
+    <p>{{word}}</p>
+
+    <div class="wordBox">
+        {{#letters}}
+          <div class="letters">{{.}}</div>
+        {{/letters}}
+    </div>
+
     <form class="" action="/" method="post">
       <input type="text" name="letter" placeholder="Guess a letter in the mystery word">
-      <p>{{word}}</p>
-      <div class="">
-        <ul>
-          {{#letters}}
-            <li>{{.}}</li>
-          {{/letters}}
-        </ul>
-      </div>
-
-      <div class="">
-        <ul>
-          {{#letters}}
-            <li>{{.}}</li>
-          {{/letters}}
-        </ul>
-      </div>
       <button type="submit" name="button">Submit</button>
     </form>
+
   </body>
 </html>

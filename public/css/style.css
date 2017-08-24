@@ -2,7 +2,15 @@ body {
   font-family: sans-serif;
 }
 
+.wordBox {
+  border: 1px solid red;
+  display: flex;
+}
+
 .letters {
   border-bottom: 1px solid black;
-  width: 100px;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  /*background: blue;*/
 }

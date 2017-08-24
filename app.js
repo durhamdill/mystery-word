@@ -35,23 +35,31 @@ app.use(bodyParser.urlencoded({extended: false}));
 // GRANT ACCESS TO STATIC FILES:
 app.use(express.static(__dirname + '/public'));
 
+
+
 app.get('/', function(req, res){
-  res.render('game');
-  randomWord();
+  randomWord(req, res);
+  console.log(req.session.word);
+  console.log(req.session.wordArray);
+  res.render('game', {word:req.session.word, letters: req.session.wordArray});
 })
 
 
 
-
-
-function randomWord() {
+//Generate random word and matching array with blank spaces:
+function randomWord(req, res) {
   let word = dictionary[Math.floor(Math.random() * dictionary.length)];
   req.session.word = word;
-  console.log(word);
-  console.log(req.session.word);
+  req.session.wordArray = [];
+  for (i=0; i<req.session.word.length; i++){
+    req.session.wordArray.push("");
+  }
+  // console.log(req.session.wordArray);
 }
 
-// randomWord();
+function wordDisplay(req, res) {
+
+}
 
 
 app.listen(port, function(req, res){

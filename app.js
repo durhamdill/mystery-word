@@ -2,10 +2,17 @@
 const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
-const mustacheExpress = require('express-mustache');
+const mustache = require('mustache-express');
+const port = 3000;
+
+// INITIATE APP
+const app = express();
 
 // SUPPLY DATA FOR GAME:
 const dictionary = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
+
+// console.log(dictionary.length);
+// dictionary.length=235,887
 
 // MUSTACHE PARTICULARS:
 app.engine('mustache', mustache());
@@ -20,15 +27,23 @@ app.use(bodyParser.urlencoded({extended: false}));
 // GRANT ACCESS TO STATIC FILES:
 app.use(express.static(__dirname + '/public'));
 
-// INITIATE APP
-const app = express();
+app.get('/', function(req, res){
+  res.render('game');
+  randomWord();
+})
 
 
 
-console.log(dictionary.length);
 
-var rand = words[Math.floor(Math.random() * dictionary.length)];
 
-console.log(rand);
+function randomWord() {
+  let word = dictionary[Math.floor(Math.random() * dictionary.length)];
+  console.log(word);
+}
 
-// words.length=235,887
+// randomWord();
+
+
+app.listen(port, function(req, res){
+   console.log('Starting mystery word game...');
+  });

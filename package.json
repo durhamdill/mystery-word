@@ -13,6 +13,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
-    "express-mustache": "^1.0.3"
+    "express-mustache": "^1.0.3",
+    "mustache-express": "^1.2.5"
   }
 }

@@ -39,8 +39,13 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
   randomWord(req, res);
-  console.log(req.session.word);
-  console.log(req.session.wordArray);
+  console.log("Mystery Word: " + req.session.word);
+  // console.log(req.session.wordArray);
+  res.render('game', {word:req.session.word, letters: req.session.wordArray});
+})
+
+app.post('/', function(req, res){
+  checkGuess(req, res);
   res.render('game', {word:req.session.word, letters: req.session.wordArray});
 })
 
@@ -51,14 +56,27 @@ function randomWord(req, res) {
   let word = dictionary[Math.floor(Math.random() * dictionary.length)];
   req.session.word = word;
   req.session.wordArray = [];
+  req.session.guesses = [];
+  req.session.lives = 8;
   for (i=0; i<req.session.word.length; i++){
     req.session.wordArray.push("");
   }
   // console.log(req.session.wordArray);
 }
 
-function wordDisplay(req, res) {
-
+function checkGuess(req, res) {
+  let guess = req.body.letter;
+  let word = req.session.word;
+  let array = req.session.wordArray;
+  console.log(guess);
+  for (i=0; i<req.session.word.length; i++){
+    if (guess===word[i]){
+      array[i]=guess;
+      console.log("Letter " + guess + " found!");
+    } else {
+      console.log("Letter " + guess + " not found!");
+    }
+  }
 }
 
 

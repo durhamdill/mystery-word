@@ -46,6 +46,7 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
   checkGuess(req, res);
+  statusUpdate(req, res);
   res.render('game', {word:req.session.word, letters: req.session.wordArray, guesses:req.session.guesses, lives: req.session.lives});
 })
 
@@ -65,21 +66,34 @@ function randomWord(req, res) {
 }
 
 function checkGuess(req, res) {
+  req.session.matches = 0;
   let guess = req.body.letter.toLowerCase();
   let word = req.session.word;
   let array = req.session.wordArray;
   req.session.guesses.push(guess.toUpperCase());
-  console.log(guess);
+  console.log("Guess: " + guess);
   for (i=0; i<req.session.word.length; i++){
     if (guess===word[i]){
       array[i]=guess.toUpperCase();
+      req.session.matches++;
       console.log("Letter " + guess + " found!");
     } else {
+      // if(req.body.matches===0){
+      //   req.session.guesses--;
+      // }
       console.log("Letter " + guess + " not found!");
     }
   }
-  // req.session.lives--;
-  // console.log(req.session.lives);
+  console.log("Total matches: " + req.session.matches);
+}
+
+function statusUpdate(req, res) {
+  console.log("hi");
+  console.log(req.session.matches);
+  if (req.session.matches==0){
+    req.session.lives-=1;
+    console.log(req.session.lives);
+  }
 }
 
 

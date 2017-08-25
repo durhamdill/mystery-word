@@ -47,7 +47,7 @@ app.get('/', function(req, res){
 app.post('/', function(req, res){
   checkGuess(req, res);
   statusUpdate(req, res);
-  res.render('game', {word:req.session.word, letters: req.session.wordArray, guesses:req.session.guesses, lives: req.session.lives});
+  res.render('game', {word:req.session.word, letters: req.session.wordArray, guesses:req.session.guesses, lives: req.session.lives, message: req.session.message});
 })
 
 
@@ -78,9 +78,6 @@ function checkGuess(req, res) {
       req.session.matches++;
       console.log("Letter " + guess + " found!");
     } else {
-      // if(req.body.matches===0){
-      //   req.session.guesses--;
-      // }
       console.log("Letter " + guess + " not found!");
     }
   }
@@ -88,14 +85,20 @@ function checkGuess(req, res) {
 }
 
 function statusUpdate(req, res) {
-  console.log("hi");
-  console.log(req.session.matches);
+  // console.log("hi");
+  // console.log(req.session.matches);
   if (req.session.matches==0){
     req.session.lives-=1;
+    req.session.message = "Sorry no match, try again!";
     console.log(req.session.lives);
+  } else {
+    req.session.message = "Nice job. Guess again!"
   }
 }
 
+function validateGuess(req, res) {
+  
+}
 
 app.listen(port, function(req, res){
    console.log('Starting mystery word game...');

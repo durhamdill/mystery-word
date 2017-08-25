@@ -8,6 +8,13 @@
   <body>
     <h1>Mystery Word</h1>
 
+    <form class="" action="/" method="post">
+      <input type="text" name="letter" placeholder="Pick a letter">
+      <button type="submit" name="button">Submit Your Guess</button>
+    </form>
+
+    <p>{{message}}</p>
+
     <p>{{word}}</p>
 
     <div class="wordBox">
@@ -15,11 +22,6 @@
           <div class="letters">{{.}}</div>
         {{/letters}}
     </div>
-
-    <form class="" action="/" method="post">
-      <input type="text" name="letter" placeholder="Pick a letter">
-      <button type="submit" name="button">Submit Your Guess</button>
-    </form>
 
     <p>Letters Guessed: {{guesses}}</p>
     <p>You have {{lives}} lives remaining.</p>

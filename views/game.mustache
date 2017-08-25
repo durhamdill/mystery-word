@@ -17,9 +17,12 @@
     </div>
 
     <form class="" action="/" method="post">
-      <input type="text" name="letter" placeholder="Guess a letter in the mystery word">
-      <button type="submit" name="button">Submit</button>
+      <input type="text" name="letter" placeholder="Pick a letter">
+      <button type="submit" name="button">Submit Your Guess</button>
     </form>
+
+    <p>Letters Guessed: {{guesses}}</p>
+    <p>You have {{lives}} lives remaining.</p>
 
   </body>
 </html>

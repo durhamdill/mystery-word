@@ -41,12 +41,12 @@ app.get('/', function(req, res){
   randomWord(req, res);
   console.log("Mystery Word: " + req.session.word);
   // console.log(req.session.wordArray);
-  res.render('game', {word:req.session.word, letters: req.session.wordArray});
+  res.render('game', {word:req.session.word, letters: req.session.wordArray, lives:req.session.lives});
 })
 
 app.post('/', function(req, res){
   checkGuess(req, res);
-  res.render('game', {word:req.session.word, letters: req.session.wordArray});
+  res.render('game', {word:req.session.word, letters: req.session.wordArray, guesses:req.session.guesses, lives: req.session.lives});
 })
 
 
@@ -65,18 +65,21 @@ function randomWord(req, res) {
 }
 
 function checkGuess(req, res) {
-  let guess = req.body.letter;
+  let guess = req.body.letter.toLowerCase();
   let word = req.session.word;
   let array = req.session.wordArray;
+  req.session.guesses.push(guess.toUpperCase());
   console.log(guess);
   for (i=0; i<req.session.word.length; i++){
     if (guess===word[i]){
-      array[i]=guess;
+      array[i]=guess.toUpperCase();
       console.log("Letter " + guess + " found!");
     } else {
       console.log("Letter " + guess + " not found!");
     }
   }
+  // req.session.lives--;
+  // console.log(req.session.lives);
 }
 
 

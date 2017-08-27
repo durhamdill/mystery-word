@@ -106,7 +106,7 @@ img {
    width: 200px;
    height: 60px;
    color: #425c5a;
-   padding: 5px;
+   padding: 15px;
    background: #d3ffff;
    position: relative;
 	 margin-left: 20px;
@@ -118,7 +118,7 @@ img {
    content:"";
    position: absolute;
    right: 98%;
-	 top: 20px;
+	 top: 30px;
    width: 0;
    height: 0;
    border-top: 10px solid transparent;
@@ -131,6 +131,7 @@ img {
 .gameStats {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   background-color: #383838;
   border-radius: 10px;
   margin: 20px;

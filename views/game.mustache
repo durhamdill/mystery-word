@@ -10,11 +10,13 @@
   <body>
     <div class="wrapper">
 
+      {{#test}}<p class="test">Test Text</p>{{/test}}
+
       <h1>Mystery Word</h1>
 
       <div class="detectiveBox">
         <img src="Untitled-1.png" alt="">
-        <p id="talkbubble">{{message}}</p>
+        <p id="talkbubble">{{{message}}}</p>
       </div>
 
       <form class="" action="/" method="post">

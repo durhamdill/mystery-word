@@ -41,6 +41,8 @@ app.use(express.static(__dirname + '/public'));
 
 //GET-POST/ROUTE SETUP:
 app.get('/', function(req, res){
+  req.session.test = true;
+  console.log(req.session.test);
   randomWord(req, res);
   console.log("Mystery Word: " + req.session.word);
   // console.log(req.session.wordArray);
@@ -57,7 +59,7 @@ app.post('/', function(req, res){
 //GENERATE RANDOM WORD AND MATCHING ARRAY WITH BLANKS:
 function randomWord(req, res) {
   let word = dictionary[Math.floor(Math.random() * dictionary.length)];
-  req.session.word = word;
+  req.session.word = word.toUpperCase();
   req.session.wordArray = [];
   req.session.guesses = [];
   req.session.lives = 8;
@@ -86,14 +88,14 @@ function validateGuess(req, res) {
 //COMPARE GUESS AGAINST MYSTERY WORD:
 function compareGuess(req, res) {
   req.session.matches = 0;
-  let guess = req.body.letter.toLowerCase();
+  let guess = req.body.letter.toUpperCase();
   let word = req.session.word;
   let array = req.session.wordArray;
-  req.session.guesses.push(guess.toUpperCase());
+  req.session.guesses.push(guess);
   console.log("Guess: " + guess);
   for (i=0; i<req.session.word.length; i++){
     if (guess===word[i]){
-      array[i]=guess.toUpperCase();
+      array[i]=guess;
       req.session.matches++;
       req.session.matchTotal++;
       console.log("Letter " + guess + " found!");
@@ -116,7 +118,8 @@ function statusUpdate(req, res) {
     // console.log(req.session.lives);
   } else if (req.session.matches==0 && req.session.lives==1) {
     req.session.lives-=1;
-    req.session.message = "Out of luck gumshoe. Game over."
+    req.session.message = "Out of luck gumshoe. <br>Game over.";
+    req.session.wordArray = req.session.word.split('');
   } else if (req.session.matches>0 && req.session.matchTotal ==req.session.word.length) {
     req.session.message = "Case closed. The mystery word is revealed!"
   } else {

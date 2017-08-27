@@ -44,7 +44,7 @@ app.get('/', function(req, res){
   randomWord(req, res);
   console.log("Mystery Word: " + req.session.word);
   // console.log(req.session.wordArray);
-  res.render('game', {word:req.session.word, letters: req.session.wordArray, lives:req.session.lives});
+  res.render('game', {word:req.session.word, letters: req.session.wordArray, lives:req.session.lives, message: req.session.message});
 })
 
 app.post('/', function(req, res){
@@ -61,6 +61,8 @@ function randomWord(req, res) {
   req.session.wordArray = [];
   req.session.guesses = [];
   req.session.lives = 8;
+  req.session.matchTotal = 0;
+  req.session.message = "Hi, I'm Detective Letterhead. Help me uncover the hidden word."
   for (i=0; i<req.session.word.length; i++){
     req.session.wordArray.push("");
   }
@@ -93,6 +95,7 @@ function compareGuess(req, res) {
     if (guess===word[i]){
       array[i]=guess.toUpperCase();
       req.session.matches++;
+      req.session.matchTotal++;
       console.log("Letter " + guess + " found!");
     } else {
       console.log("Letter " + guess + " not found!");
@@ -105,11 +108,17 @@ function compareGuess(req, res) {
 //SEND STATUS UPDATE BACK TO PLAYER:
 function statusUpdate(req, res) {
   // console.log("hi");
-  // console.log(req.session.matches);
-  if (req.session.matches==0){
+  console.log(req.session.matches);
+  console.log(req.session.matchTotal);
+  if (req.session.matches==0 && req.session.lives>1){
     req.session.lives-=1;
-    req.session.message = "Sorry no match, try again!";
-    console.log(req.session.lives);
+    req.session.message = "Sorry, no match. Try again!";
+    // console.log(req.session.lives);
+  } else if (req.session.matches==0 && req.session.lives==1) {
+    req.session.lives-=1;
+    req.session.message = "Out of luck gumshoe. Game over."
+  } else if (req.session.matches>0 && req.session.matchTotal ==req.session.word.length) {
+    req.session.message = "Case closed. The mystery word is revealed!"
   } else {
     req.session.message = "Nice job. Guess again!"
   }

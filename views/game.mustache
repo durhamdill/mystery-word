@@ -5,20 +5,24 @@
     <title>Mystery Word</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Mystery+Quest" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
   </head>
   <body>
     <div class="wrapper">
 
       <h1>Mystery Word</h1>
 
+      <div class="detectiveBox">
+        <img src="Untitled-1.png" alt="">
+        <p id="talkbubble">{{message}}</p>
+      </div>
+
       <form class="" action="/" method="post">
         <input type="text" name="letter" placeholder="Pick a letter">
-        <button type="submit" name="button">Submit Your Guess</button>
+        <button type="submit" name="button">Submit</button>
       </form>
 
-      <p>{{message}}</p>
-
-      <p>{{word}}</p>
+      <!-- <p>{{word}}</p> -->
 
       <div class="wordBox">
           {{#letters}}
@@ -26,8 +30,11 @@
           {{/letters}}
       </div>
 
-      <p>Letters Guessed: {{guesses}}</p>
-      <p>You have {{lives}} lives remaining.</p>
+      <div class="gameStats">
+        <p>GAME STATS:</p>
+        <p><span id="yellow">Guesses Remaining:</span> {{lives}}</p>
+        <p><span id="yellow">Letters Guessed:</span> {{guesses}}</p>
+      </div>
 
     </div>
   </body>

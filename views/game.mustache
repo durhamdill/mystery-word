@@ -4,27 +4,31 @@
     <meta charset="utf-8">
     <title>Mystery Word</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Mystery+Quest" rel="stylesheet">
   </head>
   <body>
-    <h1>Mystery Word</h1>
+    <div class="wrapper">
 
-    <form class="" action="/" method="post">
-      <input type="text" name="letter" placeholder="Pick a letter">
-      <button type="submit" name="button">Submit Your Guess</button>
-    </form>
+      <h1>Mystery Word</h1>
 
-    <p>{{message}}</p>
+      <form class="" action="/" method="post">
+        <input type="text" name="letter" placeholder="Pick a letter">
+        <button type="submit" name="button">Submit Your Guess</button>
+      </form>
 
-    <p>{{word}}</p>
+      <p>{{message}}</p>
 
-    <div class="wordBox">
-        {{#letters}}
-          <div class="letters">{{.}}</div>
-        {{/letters}}
+      <p>{{word}}</p>
+
+      <div class="wordBox">
+          {{#letters}}
+            <div class="letters"><p>{{.}}</p></div>
+          {{/letters}}
+      </div>
+
+      <p>Letters Guessed: {{guesses}}</p>
+      <p>You have {{lives}} lives remaining.</p>
+
     </div>
-
-    <p>Letters Guessed: {{guesses}}</p>
-    <p>You have {{lives}} lives remaining.</p>
-
   </body>
 </html>

@@ -41,19 +41,19 @@ app.use(express.static(__dirname + '/public'));
 
 //GET-POST/ROUTE SETUP:
 app.get('/', function(req, res){
-  req.session.test = true;
+  req.session.gameOver = false;
   console.log(req.session.test);
   randomWord(req, res);
   console.log("Mystery Word: " + req.session.word);
   // console.log(req.session.wordArray);
-  res.render('game', {word:req.session.word, letters: req.session.wordArray, lives:req.session.lives, message: req.session.message});
+  res.render('game', {word:req.session.word, letters: req.session.wordArray, lives:req.session.lives, message: req.session.message, gameOver:req.session.gameOver});
 })
 
 app.post('/', function(req, res){
   validateGuess(req, res);
   // compareGuess(req, res);
   // statusUpdate(req, res);
-  res.render('game', {word:req.session.word, letters: req.session.wordArray, guesses:req.session.guesses, lives: req.session.lives, message: req.session.message});
+  res.render('game', {word:req.session.word, letters: req.session.wordArray, guesses:req.session.guesses, lives: req.session.lives, message: req.session.message, gameOver:req.session.gameOver});
 })
 
 //GENERATE RANDOM WORD AND MATCHING ARRAY WITH BLANKS:
@@ -120,10 +120,12 @@ function statusUpdate(req, res) {
     req.session.lives-=1;
     req.session.message = "Out of luck gumshoe. <br>Game over.";
     req.session.wordArray = req.session.word.split('');
+    req.session.gameOver=true;
   } else if (req.session.matches>0 && req.session.matchTotal ==req.session.word.length) {
-    req.session.message = "Case closed. The mystery word is revealed!"
+    req.session.message = "Case closed. The mystery word is revealed!";
+    req.session.gameOver=true;
   } else {
-    req.session.message = "Nice job. Guess again!"
+    req.session.message = "Nice job. Guess again!";
   }
 }
 

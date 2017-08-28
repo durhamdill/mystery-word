@@ -10,7 +10,7 @@
   <body>
     <div class="wrapper">
 
-      {{#test}}<p class="test">Test Text</p>{{/test}}
+      {{ #test }}<p class="test">Test Text</p>{{ /test }}
 
       <h1>Mystery Word</h1>
 
@@ -19,10 +19,18 @@
         <p id="talkbubble">{{{message}}}</p>
       </div>
 
-      <form class="" action="/" method="post">
-        <input type="text" name="letter" placeholder="Pick a letter">
-        <button type="submit" name="button">Submit</button>
-      </form>
+      {{ ^gameOver }}
+        <form class="" action="/" method="post">
+          <input type="text" name="letter" placeholder="Pick a letter">
+          <button type="submit" name="button">Submit</button>
+        </form>
+      {{ /gameOver }}
+
+      {{ #gameOver }}
+        <form class="" action="/" method="get">
+          <button type="submit" name="button">Play Again!</button>
+        </form>
+      {{ /gameOver }}
 
       <!-- <p>{{word}}</p> -->
 

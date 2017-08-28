@@ -4,25 +4,24 @@ body {
   font-family: sans-serif;
   background-color: #2d5867;
   color: white;
+    /*margin: 0, auto;*/
 }
 
 .wrapper {
-  margin: 0, auto;
-  /*width: 80vh;*/
+  /*margin: 0, auto;*/
   text-align: center;
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /*align-content: center;*/
-  /*border: 1px solid red;*/
+  /*align-items: center;*/
+  border: 1px solid red;
 }
 
 /*------STYLES FOR MAIN HEADER/LOGO:-------*/
 
 h1{
-  /*font-family: 'Mystery Quest', cursive;*/
   font-family: 'Special Elite', cursive;
   font-size: 3.5em;
   color: #383838;
@@ -58,11 +57,12 @@ button {
 /*-----STYLES FOR WORD/LETTER DISPLAY:-------*/
 
 .wordBox {
-  /*border: 1px solid red;*/
+  border: 1px solid red;
   margin: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  /*flex-shrink: 1;*/
 }
 
 .letters {
@@ -71,10 +71,11 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 0 1 1;
   width: 50px;
   height: 50px;
   margin: 5px;
-  padding-top: 5px;
+  padding-top: 6px;
 
   font-family: 'Special Elite', sans-serif;
   color: #5c773f;
@@ -96,7 +97,7 @@ img {
   justify-content: center;
   align-items: center;
   margin: 0 0 30px 0;
-  /*border: 1px solid red;*/
+  border: 1px solid red;
 }
 
 #talkbubble {
@@ -131,10 +132,17 @@ img {
 .gameStats {
   display: flex;
   justify-content: center;
+  margin: 20px 0;
+  border: 1px solid red;
+}
+
+#statBox {
+  display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+  width: 80%;
   background-color: #383838;
   border-radius: 10px;
-  margin: 20px;
 }
 
 .gameStats p {

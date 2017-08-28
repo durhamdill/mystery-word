@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Mystery Word</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Mystery+Quest" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
   </head>
   <body>
@@ -41,9 +40,11 @@
       </div>
 
       <div class="gameStats">
-        <p>GAME STATS:</p>
-        <p><span id="yellow">Guesses Remaining:</span> {{lives}}</p>
-        <p><span id="yellow">Letters Guessed:</span> {{guesses}}</p>
+        <div id="statBox">
+          <p>GAME STATS:</p>
+          <p><span id="yellow">Guesses Remaining:</span> {{lives}}</p>
+          <p><span id="yellow">Letters Guessed:</span> {{guesses}}</p>
+        </div>
       </div>
 
     </div>

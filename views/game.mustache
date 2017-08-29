@@ -9,12 +9,22 @@
   <body>
     <div class="wrapper">
 
-      {{ #test }}<p class="test">Test Text</p>{{ /test }}
+
+      <form class="" action="/" method="get">
+        <label for="level">Choose Your Level: </label>
+        <select class="" name="level" id="level">
+          <option value="Easy">Easy (4-6 letters)</option>
+          <option value="Normal">Normal (6-8 letters)</option>
+          <option value="Hard">Hard (8-10 letters)</option>
+        </select>
+        <button type="submit" name="button">Submit</button>
+      </form>
+
 
       <h1>Mystery Word</h1>
 
       <div class="detectiveBox">
-        <img src="Untitled-1.png" alt="">
+        <img src="detective.png" alt="">
         <p id="talkbubble">{{{message}}}</p>
       </div>
 

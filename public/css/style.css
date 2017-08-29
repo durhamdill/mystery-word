@@ -35,10 +35,16 @@ form {
   margin-bottom: 20px;
 }
 
-input {
+input, select {
   height: 30px;
   font-size: 1em;
   text-align: center;
+}
+
+select {
+  height: 33px;
+  /*padding-right: 20px;*/
+  /*border-radius: 1px;*/
 }
 
 button {

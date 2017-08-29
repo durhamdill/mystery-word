@@ -21,6 +21,32 @@ app.use(session({
 // SUPPLY DATA FOR GAME:
 const dictionary = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
 
+// console.log(dictionary);
+
+let dictionaryEasy = [];
+let dictionaryNormal = [];
+let dictionaryHard = [];
+
+dictionary.map(function(x){
+  if (x.length>3 && x.length<7) {
+    dictionaryEasy.push(x);
+  }
+})
+
+dictionary.map(function(x){
+  if (x.length>5 && x.length<9) {
+    dictionaryNormal.push(x);
+  }
+})
+
+dictionary.map(function(x){
+  if (x.length>7 && x.length<11) {
+    dictionaryHard.push(x);
+  }
+})
+
+// console.log(dictionaryHard);
+
 // console.log(dictionary.length);
 // dictionary.length=235,887
 
@@ -42,7 +68,9 @@ app.use(express.static(__dirname + '/public'));
 //GET-POST/ROUTE SETUP:
 app.get('/', function(req, res){
   req.session.gameOver = false;
-  console.log(req.session.test);
+  // console.log(req.session.test);
+  let level = req.body.level;
+  console.log("Level: " + level);
   randomWord(req, res);
   console.log("Mystery Word: " + req.session.word);
   // console.log(req.session.wordArray);
@@ -58,7 +86,7 @@ app.post('/', function(req, res){
 
 //GENERATE RANDOM WORD AND MATCHING ARRAY WITH BLANKS:
 function randomWord(req, res) {
-  let word = dictionary[Math.floor(Math.random() * dictionary.length)];
+  let word = dictionaryEasy[Math.floor(Math.random() * dictionaryEasy.length)];
   req.session.word = word.toUpperCase();
   req.session.wordArray = [];
   req.session.guesses = [];

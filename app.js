@@ -21,7 +21,7 @@ app.use(session({
 // SUPPLY DATA FOR GAME:
 const dictionary = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
 
-// console.log(dictionary);
+// CREATE WORD LISTS FOR DIFFERENT LEVELS:
 
 let dictionaryEasy = [];
 let dictionaryNormal = [];
@@ -45,11 +45,6 @@ dictionary.map(function(x){
   }
 })
 
-// console.log(dictionaryHard);
-
-// console.log(dictionary.length);
-// dictionary.length=235,887
-
 // MUSTACHE PARTICULARS:
 app.engine('mustache', mustache());
 app.set('views', './views');
@@ -68,9 +63,9 @@ app.use(express.static(__dirname + '/public'));
 //GET-POST/ROUTE SETUP:
 app.get('/', function(req, res){
   req.session.gameOver = false;
-  // console.log(req.session.test);
-  let level = req.body.level;
-  console.log("Level: " + level);
+  // // console.log(req.session.test);
+  // let level = req.body.level;
+  // console.log("Level: " + level);
   randomWord(req, res);
   console.log("Mystery Word: " + req.session.word);
   // console.log(req.session.wordArray);
@@ -79,14 +74,15 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
   validateGuess(req, res);
-  // compareGuess(req, res);
-  // statusUpdate(req, res);
+  // console.log(req.body.level);
   res.render('game', {word:req.session.word, letters: req.session.wordArray, guesses:req.session.guesses, lives: req.session.lives, message: req.session.message, gameOver:req.session.gameOver});
 })
 
 //GENERATE RANDOM WORD AND MATCHING ARRAY WITH BLANKS:
 function randomWord(req, res) {
-  let word = dictionaryEasy[Math.floor(Math.random() * dictionaryEasy.length)];
+  // let level = req.body.level;
+  // console.log("Level: " + level );
+  let word = dictionary[Math.floor(Math.random() * dictionaryEasy.length)];
   req.session.word = word.toUpperCase();
   req.session.wordArray = [];
   req.session.guesses = [];
@@ -96,11 +92,9 @@ function randomWord(req, res) {
   for (i=0; i<req.session.word.length; i++){
     req.session.wordArray.push("");
   }
-  // console.log(req.session.wordArray);
 }
 
 function validateGuess(req, res) {
-  // console.log(req.session.guesses);
   if (req.session.guesses.includes(req.body.letter.toUpperCase())){
     console.log("not valid: double guess");
     req.session.message = "You already tried that one. Try again!";
@@ -137,13 +131,11 @@ function compareGuess(req, res) {
 
 //SEND STATUS UPDATE BACK TO PLAYER:
 function statusUpdate(req, res) {
-  // console.log("hi");
-  console.log(req.session.matches);
-  console.log(req.session.matchTotal);
+  // console.log(req.session.matches);
+  // console.log(req.session.matchTotal);
   if (req.session.matches==0 && req.session.lives>1){
     req.session.lives-=1;
     req.session.message = "Sorry, no match. Try again!";
-    // console.log(req.session.lives);
   } else if (req.session.matches==0 && req.session.lives==1) {
     req.session.lives-=1;
     req.session.message = "Out of luck gumshoe. <br>Game over.";

@@ -9,16 +9,17 @@
   <body>
     <div class="wrapper">
 
-
-      <form class="" action="/" method="get">
+    {{#start}}
+      <form class="" action="/" method="post">
         <label for="level">Choose Your Level: </label>
         <select class="" name="level" id="level">
-          <option value="Easy">Easy (4-6 letters)</option>
-          <option value="Normal">Normal (6-8 letters)</option>
-          <option value="Hard">Hard (8-10 letters)</option>
+          <option name = "level" value="Easy">Easy (4-6 letters)</option>
+          <option name = "level" value="Normal">Normal (6-8 letters)</option>
+          <option name = "level" value="Hard">Hard (8-10 letters)</option>
         </select>
         <button type="submit" name="button">Submit</button>
       </form>
+    {{/start}}
 
 
       <h1>Mystery Word</h1>
